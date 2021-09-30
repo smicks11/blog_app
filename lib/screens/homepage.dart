@@ -1,22 +1,17 @@
-// import 'dart:html';
-
-// import 'package:blog_app/model/news.dart';
-// import 'package:blog_app/data/storiesdata.dart';
 import 'package:blog_app/helper/main_news.dart';
-import 'package:blog_app/model/article_model.dart';
 import 'package:blog_app/model/category_model.dart';
-import 'package:blog_app/screens/app.dart';
-import 'package:blog_app/screens/chipperscreen.dart';
-import 'package:blog_app/screens/interest_screen.dart';
-import 'package:blog_app/widgets/bottombar.dart';
-import 'package:blog_app/widgets/customtext.dart';
+import 'package:blog_app/provider/provider.dart';
+import 'package:blog_app/screens/interest_screen_two.dart';
+// import 'package:blog_app/widgets/Text.dart';
 import 'package:blog_app/widgets/featuedNews.dart';
 import 'package:blog_app/widgets/popularnews.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
 
 // List<News> newsList = [
 //   News(
@@ -69,7 +64,8 @@ class Homepage extends StatefulWidget {
   _HomepageState createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> with AutomaticKeepAliveClientMixin<Homepage> {
+class _HomepageState extends State<Homepage>
+    with AutomaticKeepAliveClientMixin<Homepage> {
   List<CategoryModel> _categories = List<CategoryModel>.empty(growable: true);
 
   var newslist;
@@ -143,7 +139,7 @@ class _HomepageState extends State<Homepage> with AutomaticKeepAliveClientMixin<
 //       actions: <Widget>[
 //         new GestureDetector(
 //           onTap: () => Navigator.of(context).pop(false),
-//           child: CustomText(
+//           child: Text(
 //             text: "No",
 //             color: Colors.black,
 //             size: 16,
@@ -152,7 +148,7 @@ class _HomepageState extends State<Homepage> with AutomaticKeepAliveClientMixin<
 //         SizedBox(height: 16),
 //         new GestureDetector(
 //           onTap: () => Navigator.of(context).pop(true),
-//           child: CustomText(
+//           child: Text(
 //             text: "Yes",
 //             color: Colors.black,
 //             size: 16,
@@ -165,21 +161,28 @@ class _HomepageState extends State<Homepage> with AutomaticKeepAliveClientMixin<
 // }
 
   Future<bool> _onBackPressed() {
-    return Navigator.of(context)
-            .push(MaterialPageRoute(builder: (ctx) => InterestScreen())) ??
+    return Navigator.of(context).push(
+            MaterialPageRoute(builder: (ctx) => SecondInterestScreen())) ??
         false;
   }
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
         body: SafeArea(
           child: _loading
               ? Center(
-                  child: Container(
-                    child: CircularProgressIndicator(),
+                  child: SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: SpinKitWanderingCubes(
+                      color: Colors.blueAccent,
+                      shape: BoxShape.circle,
+                      duration: Duration(milliseconds: 1500),
+                    ),
                   ),
                 )
               : Container(
@@ -195,30 +198,53 @@ class _HomepageState extends State<Homepage> with AutomaticKeepAliveClientMixin<
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                  width: 30,
-                                  child: Image.asset("images/icon.png")),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (ctx) =>
+                                                SecondInterestScreen()));
+                                  },
+                                  child: Container(
+                                      width: 30,
+                                      child: Image.asset("images/icon.png")),
+                                ),
+                                Checkbox(
+                                    value: themeChange.darkTheme,
+                                    onChanged: (bool value) {
+                                      themeChange.darkTheme = value;
+                                    })
+                              ],
                             ),
                             SizedBox(
                               height: 20,
                             ),
-                            CustomText(
-                              text: "Featured",
-                              size: 40,
-                              color: Colors.black,
-                              weight: FontWeight.bold,
+                            Text(
+                              "Featured",
+                              style: TextStyle(
+                                fontSize: 40,
+                                // color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              
                             ),
+                            
                             SizedBox(
                               height: 2,
                             ),
-                            CustomText(
-                              text: "Based on your interest",
-                              size: 22,
-                              color: Colors.black26,
-                              weight: FontWeight.bold,
-                            )
+                            Text(
+                              "Based on your interest",
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black26,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              
+                            ),
+                            
                           ],
                         ),
                       ),
@@ -255,12 +281,16 @@ class _HomepageState extends State<Homepage> with AutomaticKeepAliveClientMixin<
                             SizedBox(
                               width: 12,
                             ),
-                            CustomText(
-                              text: "Top Headlines",
-                              size: 24,
-                              color: Colors.black,
-                              weight: FontWeight.bold,
+                            Text(
+                             "Top Headlines",
+                              style: TextStyle(
+                                fontSize: 24,
+                                // color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              
                             ),
+                            
                           ],
                         ),
                       ),
@@ -273,7 +303,8 @@ class _HomepageState extends State<Homepage> with AutomaticKeepAliveClientMixin<
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (_, index) {
-                            return PopularNews(popularListBuild: _categories[index]);
+                            return PopularNews(
+                                popularListBuild: _categories[index]);
                           },
                         ),
                       )
@@ -281,15 +312,16 @@ class _HomepageState extends State<Homepage> with AutomaticKeepAliveClientMixin<
                   ),
                 ),
         ),
-        bottomNavigationBar: BottomTab(),
+        // bottomNavigationBar: BottomTab(),
       ),
     );
   }
+
   @override
   bool get wantKeepAlive => true;
 }
 
-List<News> _news = [];
+// List<News> _news = [];
 
 final String url =
     "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=640f7435fec643d6abdd8eb6de375859";

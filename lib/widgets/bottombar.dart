@@ -1,15 +1,18 @@
-import 'package:blog_app/data/storiesdata.dart';
 import 'package:blog_app/screens/homepage.dart';
-import 'package:blog_app/screens/skides.dart';
 // import 'package:blog_app/screens/skides.dart';
 import 'package:flutter/material.dart';
 
 class BottomTab extends StatefulWidget {
+  //  List<CategoryModel> category = List<CategoryModel>.empty(growable: true);
+
+  // CategoryModel categoryModel = CategoryModel();
   @override
   _BottomTabState createState() => _BottomTabState();
 }
 
 class _BottomTabState extends State<BottomTab> {
+  
+
   int _currentIndex = 0;
 
   // final _pageOptions = [
@@ -39,21 +42,11 @@ class _BottomTabState extends State<BottomTab> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: GestureDetector(
-            onTap: () {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (ctx) => Homepage()));
-              },
-            child: Icon(Icons.home)),
+          icon: Icon(Icons.home),
           title: Text(""),
         ),
         BottomNavigationBarItem(
-          icon: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (ctx) => Slides(news: news,)));
-              },
-              child: Icon(Icons.photo_size_select_actual_sharp)),
+          icon: Icon(Icons.photo_size_select_actual_sharp),
           title: Text(""),
         ),
         BottomNavigationBarItem(

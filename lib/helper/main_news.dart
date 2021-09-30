@@ -47,7 +47,7 @@ class CategoryNews {
 
     if (jsonData['status'] == "ok") {
       jsonData["articles"].forEach((element) {
-        if (element["urlToImage"] != null && element['description'] != null) {
+        if (element["urlToImage"] != null && element['description'] != null && element['author'] != null) {
           CategoryModel categoryModel = CategoryModel(
               title: element['title'],
               author: element["author"],

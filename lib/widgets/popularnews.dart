@@ -1,10 +1,8 @@
 // import 'package:blog_app/model/news.dart';
-import 'package:blog_app/helper/main_news.dart';
-import 'package:blog_app/model/article_model.dart';
+
 import 'package:blog_app/model/category_model.dart';
 import 'package:blog_app/screens/detailscreen.dart';
-import 'package:blog_app/screens/homepage.dart';
-import 'package:blog_app/widgets/customtext.dart';
+// import 'package:blog_app/widgets/Text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -26,14 +24,13 @@ class _PopularNewsState extends State<PopularNews> {
     // print(timeago.format(time));
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
+        Navigator.of(context).push(MaterialPageRoute(
             builder: (ctx) => DetailScreen(
                 image: widget.popularListBuild.urlToImage,
                 desc: widget.popularListBuild.description,
                 authorName: widget.popularListBuild.author,
                 date: widget.popularListBuild.publishedAt,
-                headline: widget.popularListBuild.title))
-                );
+                headline: widget.popularListBuild.title)));
       },
       child: Container(
         // margin: EdgeInsets.only(top: 12),
@@ -49,46 +46,52 @@ class _PopularNewsState extends State<PopularNews> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 Container(
-  child: ConstrainedBox(
-    constraints: BoxConstraints(
-      minWidth: 300.0,
-      maxWidth: 300.0,
-      minHeight: 30.0,
-      maxHeight: 100.0,
-    ),
-    child: AutoSizeText(
-  widget.popularListBuild.title,
-  style: GoogleFonts.lato(
-    textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)
-  ),
-  minFontSize: 16,
-  maxLines: 2,
-  // overflow: TextOverflow.ellipsis,
-),
-  ),
-),
-             
-                 Container(
-  child: ConstrainedBox(
-    constraints: BoxConstraints(
-      minWidth: 300.0,
-      maxWidth: 300.0,
-      minHeight: 60.0,
-      maxHeight: 100.0,
-    ),
-    child: AutoSizeText(
-  widget.popularListBuild.description,
-  style: GoogleFonts.lato(
-    textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black26)
-  ),
-  minFontSize: 13,
-  maxLines: 2,
-  // overflow: TextOverflow.ellipsis,
-),
-  ),
-),
-             
+                  Container(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minWidth: 300.0,
+                        maxWidth: 300.0,
+                        minHeight: 30.0,
+                        maxHeight: 100.0,
+                      ),
+                      child: AutoSizeText(
+                        widget.popularListBuild.title,
+                        style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                // color: Colors.black
+                                )),
+                        minFontSize: 16,
+                        maxLines: 2,
+                        // overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minWidth: 300.0,
+                        maxWidth: 300.0,
+                        minHeight: 60.0,
+                        maxHeight: 100.0,
+                      ),
+                      child: AutoSizeText(
+                        widget.popularListBuild.description,
+                        style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                                // color: Colors.black26
+                                )),
+                        minFontSize: 13,
+                        maxLines: 2,
+                        // overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+
                   // SizedBox(
                   //   height: 10,
                   // ),
@@ -97,24 +100,32 @@ class _PopularNewsState extends State<PopularNews> {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: CustomText(
-                          text: "By ${widget.popularListBuild.author}",
-                          size: 14,
-                          color: Colors.black87,
-                          weight: FontWeight.w500,
-                        ),
+                        child: Text(
+                              "By ${widget.popularListBuild.author}",
+                              style: TextStyle(
+                                fontSize: 14,
+                                // color: Colors.black87,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              
+                            ),
+                  
                       ),
                       SizedBox(
-                        // width: 44,
-                      ),
+                          // width: 44,
+                          ),
                       Container(
                           // width: 80,
-                          child: CustomText(
-                            text: timeago.format(time),
-                            size: 12,
-                            color: Colors.black26,
-                            weight: FontWeight.bold,
-                          )),
+                          child: Text(
+                              timeago.format(time),
+                              style: TextStyle(
+                                fontSize: 12,
+                                // color: Colors.black26,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              
+                            ),
+                          ),
                     ],
                   )
                 ],

@@ -1,8 +1,4 @@
-// import 'package:blog_app/widgets/customtext.dart';
-// import 'package:blog_app/screens/chipperscreen.dart';
-import 'package:blog_app/screens/interest_screen.dart';
-// import 'package:blog_app/screens/homepage.dart';
-// import 'package:blog_app/screens/homepage.dart';
+import 'package:blog_app/screens/interest_screen_two.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -73,7 +69,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.of(context).push(
-                            MaterialPageRoute(builder: (ctx) => InterestScreen()));
+                            MaterialPageRoute(builder: (ctx) => SecondInterestScreen()));
                       },
                     ),
                   ),

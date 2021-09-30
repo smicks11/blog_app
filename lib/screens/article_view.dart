@@ -1,6 +1,6 @@
 // import 'dart:async';
 
-// import 'package:blog_app/widgets/customtext.dart';
+// import 'package:blog_app/widgets/Text.dart';
 // import 'package:flutter/material.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
@@ -19,7 +19,7 @@
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //         appBar: AppBar(
-//           title: CustomText(text: "Smicks Blog", size: 20, color: Colors.white),
+//           title: Text(text: "Smicks Blog", size: 20, color: Colors.white),
 //           centerTitle: true,
 //           elevation: 0.0,
 //         ),

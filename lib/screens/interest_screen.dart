@@ -1,8 +1,9 @@
 import 'package:blog_app/helper/data.dart';
 import 'package:blog_app/model/category_model.dart';
-import 'package:blog_app/screens/categorynews.dart';
-import 'package:blog_app/screens/homepage.dart';
-import 'package:blog_app/widgets/customtext.dart';
+// import 'package:blog_app/screens/categorynews.dart';
+// import 'package:blog_app/screens/homepage.dart';
+import 'package:blog_app/screens/pageview.dart';
+import 'package:blog_app/widgets/CustomText.dart';
 import 'package:flutter/material.dart';
 
 class InterestScreen extends StatefulWidget {
@@ -32,49 +33,63 @@ class _InterestScreenState extends State<InterestScreen> {
   Widget build(BuildContext context) {
     print(categories.length);
     return Scaffold(
-      backgroundColor: Colors.grey[250],
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        child: ListView(
-          children: [
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          text:
-                              "What category of news\ninterests you at the moment?",
-                          size: 30,
-                          color: Colors.black,
-                          weight: FontWeight.bold,
-                        ),
-                      ],
+      backgroundColor: Colors.grey[50],
+      body: SafeArea(
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: ListView(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 180,
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            text:
+                                "What type of news interests you at the moment?",
+                            size: 28,
+                            color: Colors.black,
+                            weight: FontWeight.bold,
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          CustomText(
+                            text:
+                                "Select 1 news category type you'd like to\nread about",
+                            size: 17,
+                            color: Colors.black45,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                      height: 1500,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: categories.length,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          return CategoryCard(
-                              categoryName: categories[index].label);
-                        },
-                      )),
-                ],
+                    SizedBox(
+                      height: 24,
+                    ),
+                    SingleChildScrollView(
+                        // height: double.infinity,
+                        child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: BouncingScrollPhysics(),
+                      itemCount: categories.length,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return CategoryCard(
+                            categoryName: categories[index].label);
+                      },
+                    )),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -98,24 +113,44 @@ class _CategoryCardState extends State<CategoryCard> {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (ctx) => Homepage(
-                  category: widget.categoryName,
-                )));
+            builder: (ctx) =>
+                PageViewScreen(subCategory: widget.categoryName)));
       },
-      child: Container(
-        alignment: Alignment.centerLeft,
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        height: 100,
-        // width: double.infinity,
-        decoration: BoxDecoration(
-          // shape: BoxShape.rectangle,
-          // color: Colors.white,
-          // borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            CustomText(text: widget.categoryName, size: 22, color: Colors.black)
-          ],
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: Card(
+          child: Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            height: 80,
+            // width: double.infinity,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              children: [
+                // Expanded(
+                //   flex: 1,
+                //   child: Icon(Icons.access_alarm_sharp, size: 20,)),
+                Expanded(
+                  flex: 2,
+                  child: CustomText(
+                    text: widget.categoryName,
+                    size: 20,
+                    color: Colors.black54,
+                    weight: FontWeight.bold,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.purpleAccent,
+                  size: 20,
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

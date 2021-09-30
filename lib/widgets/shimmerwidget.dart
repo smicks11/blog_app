@@ -4,10 +4,10 @@
 // // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter/material.dart';
 // // import 'package:movie_app/screens/moviedetail.dart';
-// // import 'package:movie_app/widgets/customtext.dart';
+// // import 'package:movie_app/widgets/Text.dart';
 // import 'package:shimmer/shimmer.dart';
 
-// import 'customtext.dart';
+// import 'Text.dart';
 // // import 'featuedNews.dart';
 
 // class ShimmerList extends StatefulWidget {
@@ -55,7 +55,7 @@
 //                     highlightColor: Colors.grey[850],
 //                     baseColor: Color(0xff16161d),
 //                     period: Duration(milliseconds: time),
-//                     child: CustomText(
+//                     child: Text(
 //                       text: "Featured",
 //                       size: 40,
 //                       color: Colors.black,
@@ -69,7 +69,7 @@
 //                     highlightColor: Colors.grey[850],
 //                       baseColor: Color(0xff16161d),
 //                       period: Duration(milliseconds: time),
-//                     child: CustomText(
+//                     child: Text(
 //                       text: "Based on your interest",
 //                       size: 22,
 //                       color: Colors.black26,
@@ -119,7 +119,7 @@
 //                     highlightColor: Colors.grey[850],
 //                       baseColor: Color(0xff16161d),
 //                       period: Duration(milliseconds: time),
-//                     child: CustomText(
+//                     child: Text(
 //                       text: "Popular on BBC News",
 //                       size: 24,
 //                       color: Colors.black,
